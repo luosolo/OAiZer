@@ -1,1 +1,3 @@
 # OAiZer
+
+OAIzer is a tool for exporting relational database content as RDF ORE aggregations or OAI-PMH records. The tool allows users to graphically identify the graphs of entities (compound objects) in their database and select the ones they would like to export as ORE aggregations or PMH collections and instantiates the relative ORE URL entry point. The tool is useful to accelerate the export process from data sources which are not equipped with OAI interfaces (APIs) and would like to expose their content to aggregation services. 
