@@ -1,0 +1,120 @@
+<div class="hero-unit">
+	<h1>Welcome to OAIZer-DB</h1>
+	<p>The easy way to export your relational database via OAI protocols....</p>
+	<!-- 	<p> -->
+	<!-- 		Sign in to start -->
+	<!-- 	</p> -->
+
+	<!-- 	<p> -->
+	<!-- 		<a class="btn btn-primary btn-large">Learn more &raquo;</a> -->
+	<!-- 	</p> -->
+
+	<h2>Introduction</h2>
+	<p>Relational Databases are great to implement your document model
+		and manage your data but their export functionalities are limited to
+		CSV or SQL exports that reflect the structure of the relations defined
+		in the database. What if you want to export portions of your
+		information space as (XML or RDF) "export packages" of interlinked
+		information objects via OAI-PMH and OAI-ORE protocols?</p>
+	<p>Instead of implementing your own OAI-PMH and OAI-ORE publishers
+		from scratch, you can use OAIzer-DB!</p>
+	<p>OAIzer-DB connects to any JDBC-compatible RDBMS and provides you
+		with graphical user interfaces for the definition of the structure of
+		export packages and the selection of the desired OAI protocol. Once
+		structure and protocol are provided, the tool deploys an OAI HTTP
+		address and installs the code required to respond to requests by
+		dynamically building export packages according to the given structure.</p>
+
+	<!-- 	<h2>Step 1: Download and install OAIzer</h2> -->
+	<!-- 	<p>A ready-to-install package will be available soon.</p> -->
+
+	<h2>Step 1: Load the document model from the database</h2>
+	<h3>Specify the parameters to connect to your database</h3>
+	<p>Click on Connections --> Create Connection from the menu and
+		fill in the requested fields, then click on the button "Try
+		Connection" to check if the inserted information are correct.</p>
+	<img src="img/createConnection.png" alt="Create Connection screenshot"
+		class="img-polaroid" />
+	<div class="caption">
+		<h5>Creating a new connection to a relational database</h5>
+	</div>
+
+	<h3>Load the database schema</h3>
+	<p>Click on ER-schema --> Load ER-schema</p>
+	<p>OAIzer will connect to your database with the provided
+		parameters to get information about the database schema from the
+		Relation Catalog. The resulting graph document model is then
+		visualized</p>
+	<p>The graph document model contains one entity for each table
+		(using the table name) and one one-to-many relationship for each
+		foreign key (using the attribute name).</p>
+	<img src="img/ERSchema.png" alt="ER Schema visualization screenshot"
+		class="img-polaroid" />
+	<div class="caption">
+		<h5>ER Schema created by OAIzer based on the information from the
+			Relation Catalog</h5>
+	</div>
+
+	<h3>Define the graph document model from the ER-schema</h3>
+	<p>Some entities are "worth" further human analysis since they may
+		be representing many-to-many relationships. Such entities are those
+		with two (or more) outgoing one-to-many relationships, hence candidate
+		to become themselves many-to-many relationships. In the example, this
+		is the case for the entities "uses" and "cites".</p>
+	<p>Those entity are logically representing relationships. If you
+		click on them, you can tell OAIzer that those entities are in fact
+		relationships.</p>
+
+	<img src="img/convertEntitiesToRel.png"
+		alt="Conversion of entity to relationship screenshot"
+		class="img-polaroid" />
+	<div class="caption">
+		<h5>Create the graph document model from the ER Schema: selecting
+			tables that are many-to-many relationships</h5>
+	</div>
+
+	<h3>Save your graph document model</h3>
+	<p>Click on ER-schema --> Save ER-schema to save your changes</p>
+
+	<h2>Step 2: Define your views</h2>
+	<p>Views define the structure of the export packages as rooted
+		trees within the document model.</p>
+	<ol>
+		<li>Click on XXX --> YYY</li>
+		<li>Give a name to the view you are going to create</li>
+		<li>Select the root entity of the view</li>
+		<li>Start navigating the graph document model from the root
+			entity by clicking on relationships. When you select a relationship
+			you are including into the view that relationship and its target
+			entity.</li>
+	</ol>
+	<p>For each entity it is possible to specify the subset of
+		attributes to be included in the export packages.</p>
+	<img src="img/view.png" alt="Definition of a view screenshot"
+		class="img-polaroid" />
+	<div class="caption">
+		<h5>Example of a view</h5>
+	</div>
+
+	<h2>Step 3: Save and export your view</h2>
+	<p>Click on XXX --> YYY to save your view.</p>
+	<p>Click on XXX --> YYY to select the desired OAI protocol and the
+		modality (materialization or on-demand mode). Currently, only OAI-ORE
+		on-demand mode is supported.</p>
+	<p>OAIzer deploys an OAI web endpoint you can use to access your
+		export package:</p>
+	<ul>
+		<li>OAI-ORE endpoint: http://host/view_name/ore.</li>
+		<li>To access an aggregation:
+			http://host/view_name/ore/aggregation/record_identifier.</li>
+		<li>To access an aggregated resource:
+			http://host/view_name/ore/resource/record_identifier</li>
+	</ul>
+	<p>where record_identifier is the db primary key of the record you
+		want to access (aggregations will be available only for records of the
+		root entity).</p>
+
+	<!-- 	<p> -->
+	<!-- 		<a class="btn btn-primary btn-large">OAIzer Demo</a> -->
+	<!-- 	</p> -->
+</div>

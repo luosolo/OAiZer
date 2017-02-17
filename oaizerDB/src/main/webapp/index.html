@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="oaizerDB" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>OAIZer-DB Admin page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="./css/bootstrap.min2.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        /*background-image: url("./img/blueprint.gif")*/
+      }
+
+      .diamond {
+          width: 140px;
+          height: 100px;
+          background-image: url("./img/rombo_resized.png");
+          z-index: 20000;
+      }
+
+      .diamond-inner{
+          width: 140px;
+          height: 100px;
+          display: table-cell;
+          font-size: 40px;
+          color:#000000;
+          vertical-align: middle;
+          text-align: center;
+          cursor:pointer;
+      }
+
+    </style>
+    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='./js/jquery.ui.touch-punch.min.js'></script>
+    <script type="text/javascript" src="./js/jsplumb-mini-1.4.1.js"></script>
+    <script type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/angular.min.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./js/oaizer/graph.js"></script>
+
+
+
+
+
+    
+  </head>
+
+  <body ng-controller="OAIzerMainCtrl"> 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">OAIZer-DB</a>
+          <div class="nav-collapse collapse" >
+            <ul class="nav">
+              <li ><a href="#">Home</a></li>              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Connections <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#/NewConnection">Create Connection</a></li>
+                  <li><a href="#">Edit existing connection</a></li>
+                  <li><a href="#">Delete existing connections </a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">ER- Schema<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#/ER-View/1">Load ER-Schema</a></li>
+                  <li><a href="#">Save ER-Schema</a></li>                  
+                </ul>
+              </li>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">View<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/View/">Create View</a></li>
+                    </ul>
+              </li>
+
+
+            </ul>
+            <form class="navbar-form pull-right" ng-show="!mLogged"  >
+              <input ng-model="muser" class="span2" type="text" placeholder="login" />              
+              <input class="span2" type="password" placeholder="Password" ng-model="mpasswd" />
+              <a type="submit" class="btn" ng-click="login()">Sign in</a>
+            </form>
+            <div class="navbar-form pull-right" ng-show="mLogged" style="color:#FFFFFF"  >
+              Logged as {{muser}} 
+              <a type="submit"  ng-click="logout()">Logout</a>
+            </div>
+            
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container"  >
+	<ng-view></ng-view>   
+    </div> 
+    
+  </body>
+</html>

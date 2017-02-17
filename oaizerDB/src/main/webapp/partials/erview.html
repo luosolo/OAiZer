@@ -1,0 +1,83 @@
+<style>
+    .window {
+        border-radius: 32px;
+        -moz-border-radius: 32px;
+        -webkit-border-radius: 32px;
+        border: 4px ridge #800000;
+        background-color: white;
+        z-index: 3000;
+        color: #000000;
+
+    }
+
+    .inside {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        height: 100px;
+        width: 140px;
+        font-size: 50px;
+        color: #000000;
+
+    }
+
+    .component {
+
+        opacity: 0.8;
+        filter: alpha(opacity=80);
+        background-color: white;
+        color: black;
+        font-family: helvetica;
+
+        padding: 0.5em;
+        font-size: 30px;
+
+    }
+
+    .dragActive {
+        border: 3px solid #346789;
+    }
+</style>
+
+
+<div ng-model="OAIzerErView">
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Select the connection to the database</h3>
+        </div>
+        <div class="modal-body">
+            <div ng-show="connections">
+                <select ng-model="selectedConnection" ng-options="c for c in connections">
+                    <option value="">-- chose connection --</option>
+                </select>
+            </div>
+            <div ng-show="!connections">
+                <h3>You have to create a new connection to a database</h3>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button ng-show="connections" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"
+                    ng-click="loadGraph()" >Select
+            </button>
+            <button ng-show="!connections" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close
+            </button>
+        </div>
+    </div>
+
+
+    <div id="container">
+        <script>
+            //reloadGraph();
+        </script>
+
+    </div>
+    <a href="javascript:location.reload();" class="btn btn-primary btn-large">{{ valueButton }}</a>
+
+
+</div>
+

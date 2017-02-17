@@ -1,0 +1,116 @@
+
+
+<div class="hero-unit" ng-controller="OAIzerNewConnection">
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 ng-show="!saved" >Connection Error</h3>
+            <h3 ng-show="saved">Connection Saved!</h3>
+        </div>
+        <div class="modal-body">
+            <div ng-show="saved">
+                <h3>Connection Saved!</h3>
+            </div>
+            <div ng-show="!saved">
+                <p>some error occurs during the connection to database, verify if the </p>
+                <p>parameter are correct or if your postgres database allows extern connection </p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4">
+            <form>
+                <fieldset>
+                    <legend>
+                        New Connection Form
+                    </legend>
+                    <label>Connection name</label>
+                    <input type="text" placeholder="Connection Name" ng-model="connName">
+                    <label>User name</label>
+                    <input type="text" placeholder="User Name" ng-model="connUsr">
+                    <label>Password</label>
+                    <input type="password" placeholder="password" ng-model="connPasswrd">
+                    <label>Database name</label>
+                    <input type="text" placeholder="Db Name" ng-model="connDb">
+                    <label>Host Name</label>
+                    <input type="text" placeholder="localhost" ng-model="connHost">
+                    <a ng-show="!filterShow" class="btn btn-primary dropdown-toggle" ng-click="tryconnection()">
+                        Try Connection!
+                    </a>
+                    <div ng-show="filterShow">
+                        <a href="" ng-click="saveConnection()" class="btn btn-warning btn-large"><i class="icon-white icon-inbox"></i> Save Connection</a>
+                        <br>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="span6" ng-show="filterShow">
+
+            <div class="row-fluid">
+
+                <div class="span6">
+                    <input type="text" class="search-query" placeholder="Filter" ng-model="querysel">
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <a ng-click="unSelectAllEntities(filtered)" class="btn btn-danger btn-mini"><i
+                                    class="icon-white icon-remove"></i> unselect All</a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                Selected Entities
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in filtered=(selectedItems  | filter:querysel | orderBy:'name')">
+                            <td>
+                                {{item.name}}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-mini" ng-click="removeIndex(item)">unselect <i
+                                        class="icon-white icon-forward"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="span6">
+                    <input type="text" class="search-query" placeholder="Filter" ng-model="query">
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <a ng-click="selectAllEntities(filteredEnt)" class="btn btn-success btn-mini"><i
+                                    class="icon-white icon-ok"></i> Select All</a>
+                        </div>
+                    </div>
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                Original Entities
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in filteredEnt=(entities  | filter:query | orderBy:'name') ">
+                            <td style="width:20%;"><button class="btn btn-primary btn-mini" ng-click="addIndex(item)"><i class="icon-white icon-backward" ></i> select</button></td>
+                            <td style="width:80%;" >{{item.name}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
